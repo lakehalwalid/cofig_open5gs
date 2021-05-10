@@ -7,9 +7,9 @@ pgw:
     freeDiameter:
       identity: pgw.epc.mnc001.mcc001.3gppnetwork.org
       realm: epc.mnc001.mcc001.3gppnetwork.org
-      port: 3868
-      sec_port: 5868
-      listen_on: 127.0.0.3
+      port: $PGW_PORT
+      sec_port: $PGW_SEC_PORT
+      listen_on: $PGW_IP
       load_extension:
         - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dbg_msg_dumps.fdx
           conf: 0x8888
@@ -21,13 +21,13 @@ pgw:
         - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_dcca_3gpp.fdx
       connect:
         - identity: pcrf.epc.mnc001.mcc001.3gppnetwork.org
-          addr: 127.0.0.5
-          port: 3868
+          addr: $PCRF_IP
+          port: $PCRF_PORT
     gtpc:
-      - addr: 127.0.0.3
+      - addr: $PGW_IP
       - addr: ::1
     gtpu:
-      - addr: 127.0.0.3
+      - addr: $PGW_IP
       - addr: ::1
     ue_pool:
       - addr: 192.168.100.1/24
@@ -47,4 +47,4 @@ pgw:
       - 2001:4860:4860::8888
       - 2001:4860:4860::8844
     p-cscf:
-      - 10.4.128.21
+      - $PCSCF_IP
