@@ -7,9 +7,9 @@ mme:
     freeDiameter:
       identity: mme.epc.mnc001.mcc001.3gppnetwork.org
       realm: epc.mnc001.mcc001.3gppnetwork.org
-      port: 3868
-      sec_port: 5868
-      listen_on: 127.0.0.2
+      port: $MME_PORT
+      sec_port: $MME_SEC_PORT
+      listen_on: $MME_IP
       load_extension:
         - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dbg_msg_dumps.fdx
           conf: 0x8888
@@ -21,8 +21,8 @@ mme:
         - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_dcca_3gpp.fdx
       connect:
         - identity: hss.epc.mnc001.mcc001.3gppnetwork.org
-          addr: 127.0.0.4
-          port: 3868
+          addr: $HSS_IP
+          port: $HSS_PORT
     s1ap:
       dev: ens3
     gtpc:
@@ -46,10 +46,10 @@ mme:
 
 sgw:
     gtpc:
-      addr: 127.0.0.2
+      addr: $SGW_IP
 
 pgw:
     gtpc:
       addr:
-        - 127.0.0.3
+        - $PGW_IP
         - ::1
