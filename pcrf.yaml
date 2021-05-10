@@ -9,9 +9,9 @@ pcrf:
     freeDiameter:
       identity: pcrf.epc.mnc001.mcc001.3gppnetwork.org
       realm: epc.mnc001.mcc001.3gppnetwork.org
-      port: 3868
-      sec_port: 5868
-      listen_on: 127.0.0.5
+      port: $PCRF_PORT
+      sec_port: $PCRF_SEC_PORT
+      listen_on: $PCRF_IP
       load_extension:
         - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dbg_msg_dumps.fdx
           conf: 0x8888
@@ -23,8 +23,8 @@ pcrf:
         - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_dcca_3gpp.fdx
       connect:
         - identity: pgw.epc.mnc001.mcc001.3gppnetwork.org
-          addr: 127.0.0.3
-          port: 3868
+          addr: $PGW_IP
+          port: $PGW_PORT
         - identity: pcscf.ims.mnc001.mcc001.3gppnetwork.org
-          addr: 10.4.128.21
-          port: 3871
+          addr: $PCSCF_IP
+          port: $PCSCF_PORT
