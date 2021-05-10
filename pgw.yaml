@@ -1,0 +1,50 @@
+logger:
+    file: /root/open5gs/install/var/log/open5gs/pgw.log
+
+parameter:
+
+pgw:
+    freeDiameter:
+      identity: pgw.epc.mnc001.mcc001.3gppnetwork.org
+      realm: epc.mnc001.mcc001.3gppnetwork.org
+      port: 3868
+      sec_port: 5868
+      listen_on: 127.0.0.3
+      load_extension:
+        - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dbg_msg_dumps.fdx
+          conf: 0x8888
+        - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_rfc5777.fdx
+        - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_mip6i.fdx
+        - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_nasreq.fdx
+        - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_nas_mipv6.fdx
+        - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_dcca.fdx
+        - module: /root/open5gs/install/lib/x86_64-linux-gnu/freeDiameter/dict_dcca_3gpp.fdx
+      connect:
+        - identity: pcrf.epc.mnc001.mcc001.3gppnetwork.org
+          addr: 127.0.0.5
+          port: 3868
+    gtpc:
+      - addr: 127.0.0.3
+      - addr: ::1
+    gtpu:
+      - addr: 127.0.0.3
+      - addr: ::1
+    ue_pool:
+      - addr: 192.168.100.1/24
+        dev: ogstun
+      - addr: fd84:6aea:c36e:2b69::/48
+        dev: ogstun
+        apn: internet
+      - addr: 192.168.101.1/24
+        apn: ims
+        dev: ogstun2
+      - addr: fd1f:76f3:da9b:0101::/48
+        apn: ims
+        dev: ogstun2
+    dns:
+      - 8.8.8.8
+      - 8.8.4.4
+      - 2001:4860:4860::8888
+      - 2001:4860:4860::8844
+    p-cscf:
+      - 10.4.128.21
